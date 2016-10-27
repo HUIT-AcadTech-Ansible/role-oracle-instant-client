@@ -1,0 +1,14 @@
+TRACE_LEVEL_CLIENT={{ oracle_client_log_level }}
+TRACE_DIRECTORY_CLIENT={{ oracle_client_log_dir }}
+DIAG_ADR_ENABLED={{ oracle_client_adr_tracing_enabled }}
+
+# Activate client-side encryption. For a complete list of supported
+# encryption algorithms, refer to the Oracle Database Advanced Security
+# Administrator's Guide.
+SQLNET.ENCRYPTION_CLIENT = {{ oracle_client_encryption_level }}
+# Supported for types in the list below will be checked in order, so
+# favor the more secure and complex AES algorithm over RC4
+SQLNET.ENCRYPTION_TYPES_CLIENT = (AES256,RC4_256,DES)
+SQLNET.CRYPTO_CHECKSUM_CLIENT = {{ oracle_client_encryption_level }}
+# This list will be checked in order as well, so favor SHA1 over MD5
+SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT = (SHA1, MD5)

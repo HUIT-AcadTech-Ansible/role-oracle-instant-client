@@ -1,0 +1,13 @@
+---
+# defaults file for oracle instant client role
+
+# sqlnet.ora file settings
+# -------------------------
+oracle_client_adr_tracing_enabled: off  # Oracle default is on
+oracle_client_log_dir: /tmp
+oracle_client_log_level: off
+# One of: REJECTED, ACCEPTED, REQUESTED, REQUIRED
+# Requested will attempt to use encryption if the database server has a level
+# of ACCEPTED or higher.
+# http://docs.oracle.com/cd/B28359_01/network.111/b28530/asoconfg.htm#i1006401
+oracle_client_encryption_level: accepted
