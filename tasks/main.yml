@@ -24,7 +24,8 @@
 
 - name: make sure that the /opt/oracle directory exists
   file:
-    path: /opt/oracle state=directory
+    path: /opt/oracle
+    state: directory
 
 - name: install the basiclite archive
   unarchive:
