@@ -2,51 +2,56 @@
 # make sure that the Oracle instant client is installed
 
 - name: install unzip
-  apt: name=unzip state=present update_cache=yes cache_valid_time=3600
+  apt:
+    name: unzip
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
 
 - name: install libaio1
-  apt: name=libaio1 state=present update_cache=yes cache_valid_time=3600
+  apt:
+    name: libaio1
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
 
 - name: install libaio-dev
-  apt: name=libaio-dev state=present update_cache=yes cache_valid_time=3600
+  apt:
+    name: libaio-dev
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
 
 - name: make sure that the /opt/oracle directory exists
-  file: path=/opt/oracle state=directory
+  file:
+    path: /opt/oracle state=directory
 
 - name: install the basiclite archive
   unarchive:
-    src: oracle/instantclient-basiclite-linux.x64-11.2.0.3.0.zip
+    src: oracle/instantclient-basiclite-linux.x64-19.6.0.0.0dbru.zip
     dest: /opt/oracle
-    creates: /opt/oracle/instantclient_11_2/BASIC_LITE_README
+    creates: /opt/oracle/instantclient_19_6/BASIC_LITE_README
 
-- name: install the sqlplus archive
+- name: install the sdk archive
   unarchive:
-    src: oracle/instantclient-sqlplus-linux.x64-11.2.0.3.0.zip
+    src: oracle/instantclient-sdk-linux.x64-19.6.0.0.0dbru.zip
     dest: /opt/oracle
-    creates: /opt/oracle/instantclient_11_2/sqlplus
-
-- name: install the sqlplus archive
-  unarchive: src=oracle/instantclient-sdk-linux.x64-11.2.0.3.0.zip dest=/opt/oracle creates=/opt/oracle/instantclient_11_2/sdk
-
-- name: setup missing libclntsh symlink
-  file: src=/opt/oracle/instantclient_11_2/libclntsh.so.11.1 dest=/opt/oracle/instantclient_11_2/libclntsh.so state=link 
-
-- name: setup missing libocci symlink
-  file: src=/opt/oracle/instantclient_11_2/libocci.so.11.1 dest=/opt/oracle/instantclient_11_2/libocci.so state=link 
+    creates: /opt/oracle/instantclient_19_6/sdk
 
 - name: setup oracle_home and ld_library_path in profile.d
-  copy: src=oracle_home.sh dest=/etc/profile.d/oracle_home.sh mode=755
+  copy:
+    src: oracle_home.sh
+    dest: /etc/profile.d/oracle_home.sh
+    mode: 755
 
 - name: add ORACLE_HOME to /etc/environment
-  lineinfile: dest=/etc/environment state=present line='ORACLE_HOME="/opt/oracle/instantclient_11_2"'
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    line: 'ORACLE_HOME="/opt/oracle/instantclient_19_6"'
 
 - name: add LD_LIBRARY_PATH to /etc/environment
-  lineinfile: dest=/etc/environment state=present line='LD_LIBRARY_PATH="/opt/oracle/instantclient_11_2"'
-
-- name: make sure $ORACLE_HOME/network/admin directory exists (default location on unix for oracle config files)
-  file: path=/opt/oracle/instantclient_11_2/network/admin state=directory
-
-- name: install sqlnet.ora file into admin directory
-  template:
-    src: oraclehome-network-admin/sqlnet.ora.j2
-    dest: /opt/oracle/instantclient_11_2/network/admin/sqlnet.ora
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    line: 'LD_LIBRARY_PATH="/opt/oracle/instantclient_19_6"'
