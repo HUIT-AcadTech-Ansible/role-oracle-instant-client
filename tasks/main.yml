@@ -40,7 +40,7 @@
     creates: /opt/oracle/instantclient_19_6/sdk
 
 - name: copy ld.so.conf.d config file
-  file:
+  copy:
     src: ld.so.conf.d/oracle-instantclient.conf
     dest: /etc/ld.so.conf.d
 
