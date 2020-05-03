@@ -39,6 +39,12 @@
     dest: /opt/oracle
     creates: /opt/oracle/instantclient_19_6/sdk
 
+- name: create instantclient symlink
+  file:
+    src: /opt/oracle/instantclient_19_6
+    dest: /opt/oracle/instantclient
+    state: link
+
 - name: setup oracle_home and ld_library_path in profile.d
   copy:
     src: oracle_home.sh
