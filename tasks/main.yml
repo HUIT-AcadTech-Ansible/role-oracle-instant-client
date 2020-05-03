@@ -6,21 +6,21 @@
     name: unzip
     state: present
     update_cache: yes
-    cache_valid_time: 3600
+    cache_valid_time: "3600"
 
 - name: install libaio1
   apt:
     name: libaio1
     state: present
     update_cache: yes
-    cache_valid_time: 3600
+    cache_valid_time: "3600"
 
 - name: install libaio-dev
   apt:
     name: libaio-dev
     state: present
     update_cache: yes
-    cache_valid_time: 3600
+    cache_valid_time: "3600"
 
 - name: make sure that the /opt/oracle directory exists
   file:
@@ -43,7 +43,7 @@
   copy:
     src: oracle_home.sh
     dest: /etc/profile.d/oracle_home.sh
-    mode: 755
+    mode: "0755"
 
 - name: add ORACLE_HOME to /etc/environment
   lineinfile:
