@@ -39,11 +39,13 @@
     dest: /opt/oracle
     creates: /opt/oracle/instantclient_19_6/sdk
 
-- name: create instantclient symlink
+- name: copy ld.so.conf.d config file
   file:
-    src: /opt/oracle/instantclient_19_6
-    dest: /opt/oracle/instantclient
-    state: link
+    src: ld.so.conf.d/oracle-instantclient.conf
+    dest: /etc/ld.so.conf.d
+
+- name: run ldconfig
+  command: ldconfig
 
 - name: setup oracle_home and ld_library_path in profile.d
   copy:
